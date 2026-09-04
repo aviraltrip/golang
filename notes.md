@@ -17,3 +17,5 @@ go mod vendor - copies all req 3rd party dependencies into vendor/ folder & reco
 mod ke ops are expensive btw
 
 gorilla mux : URL router & request dispatcher (matches incoming HTTP requests to specific handler functions)
+
+go get -u github.com/gorilla/mux
