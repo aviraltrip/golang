@@ -6,7 +6,6 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -88,7 +87,6 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 	// generate unique id, string
 	// append course into courses
 
-	rand.Seed(time.Now().UnixNano())
 	course.CourseId = strconv.Itoa(rand.Intn(100))
 	courses = append(courses, course)
 	json.NewEncoder(w).Encode(course)
