@@ -64,7 +64,6 @@ func getOneCourse(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	json.NewEncoder(w).Encode("No Course found with given id")
-	return
 }
 
 func createOneCourse(w http.ResponseWriter, r *http.Request) {
@@ -90,5 +89,4 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 	course.CourseId = strconv.Itoa(rand.Intn(100))
 	courses = append(courses, course)
 	json.NewEncoder(w).Encode(course)
-	return
 }
