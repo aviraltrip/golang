@@ -13,5 +13,14 @@ type Author struct {
 	Website  string `json:"website"`
 }
 
+// nakli db using slice
+
+var courses []Course
+
+// middleware, helper-file
+func (c *Course) IsEmpty() bool {
+	return c.CourseId == "" && c.CourseName ==""
+}
+
 func main() {
 }
