@@ -108,6 +108,8 @@ func updateOneCourse(w http.ResponseWriter, r *http.Request) {
 			course.CourseId = params["id"]
 			courses = append(courses, course)
 			json.NewEncoder(w).Encode(course)
+			return
 		}
 	}
+	json.NewEncoder(w).Encode("No Course found with given id")
 }
