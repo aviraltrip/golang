@@ -150,7 +150,9 @@ func deleteOneCourse(w http.ResponseWriter, r *http.Request) {
 	for index, course := range courses {
 		if course.CourseId == params["id"] {
 			courses = append(courses[:index], courses[index+1:]...)
-			break
+			json.NewEncoder(w).Encode("Course deleted successfully")
+			return
 		}
 	}
+	json.NewEncoder(w).Encode("No Course found with given id")
 }
