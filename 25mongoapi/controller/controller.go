@@ -23,7 +23,8 @@ func init() {
 	clientOption := options.Client().ApplyURI(connectionString)
 
 	//connect to mongodb
-	client, err := mongo.Connect(context.TODO(), clientOption)
+	client, err := mongo.Connect(context.TODO(), clientOption) // returns a non-nil, empty context
+	// used jab I know a function needs a context but not yet sure which one to use
 
 	if err != nil {
 		log.Fatal(err)
