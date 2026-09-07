@@ -154,5 +154,5 @@ func deleteOneCourse(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	json.NewEncoder(w).Encode("No Course found with given id")
+ 	json.NewEncoder(w).Encode("No Course found with given id")
 }
