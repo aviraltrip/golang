@@ -102,6 +102,13 @@ func createOneCourse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	for _, existingCourse := range courses {
+		if existingCourse.CourseName == course.CourseName {
+			json.NewEncoder(w).Encode("Course already exists")
+			return
+		}
+	}
+
 	// generate unique id, string
 	// append course into courses
 
