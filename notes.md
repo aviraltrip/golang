@@ -19,3 +19,9 @@ mod ke ops are expensive btw
 gorilla mux : URL router & request dispatcher (matches incoming HTTP requests to specific handler functions)
 
 go get -u github.com/gorilla/mux
+
+Concurrency: handling multiple tasks at the same time by switching between them (using goroutines)
+
+Parallelism: running multiple tasks simultaneously on different CPU cores.
+
+goroutines - do not communicate by sharing memory, instead share memory by communicating 
