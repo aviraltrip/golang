@@ -6,16 +6,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/aviraltrip/mongoapi/model"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const connectionString = "mongodb+srv://aviraltripathi25_db_user:EZTIld2aP6s4gXhz@cluster0.pzzyhjy.mongodb.net/?appName=Cluster0"
 const dbName = "netmirror"
 const colName = "watchlist"
 
@@ -25,16 +27,28 @@ var collection *mongo.Collection
 //connect with mongodb
 
 func init() {
+	_ = godotenv.Load()
+	connectionString := os.Getenv("MONGODB_URI")
+	if connectionString == "" {
+		log.Fatal("MONGODB_URI is not set")
+	}
+
 	//client option
 	clientOption := options.Client().ApplyURI(connectionString)
 
 	//connect to mongodb
-	client, err := mongo.Connect(context.TODO(), clientOption) // returns a non-nil, empty context
+	client, err := mongo.Connect(context.Background(), clientOption)
 	// used jab I know a function needs a context but not yet sure which one to use
 
 	if err != nil {
 		log.Fatal(err)
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	if err := client.Ping(ctx, nil); err != nil {
+		log.Fatal("MongoDB ping failed: ", err)
+	}
+
 	fmt.Println("MongoDB connection success")
 	collection = client.Database(dbName).Collection(colName)
 
