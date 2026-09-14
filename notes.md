@@ -25,3 +25,5 @@ Concurrency: handling multiple tasks at the same time by switching between them 
 Parallelism: running multiple tasks simultaneously on different CPU cores.
 
 goroutines - do not communicate by sharing memory, instead share memory by communicating 
+
+channels - comms b/w goroutines, lets 1 goroutine send data & another receive data safely
