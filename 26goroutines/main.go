@@ -6,13 +6,14 @@ import (
 	"sync"
 )
 
+var signals = []string{"test"}
 var wg sync.WaitGroup //pointer
+var mut sync.Mutex    //pointer
 
 func main() {
 	// go greeter("Hello")
 	// greeter("World")
 	websitelist := []string{
-		"https://lco.dev",
 		"https://go.dev",
 		"https://google.com",
 		"https://fb.com",
@@ -24,6 +25,7 @@ func main() {
 		go getStatusCode(web)
 	}
 	wg.Wait()
+	fmt.Println(signals)
 }
 
 // func greeter(s string) {
@@ -42,6 +44,8 @@ func getStatusCode(endpoint string) {
 		return
 	}
 	defer res.Body.Close()
-
+	mut.Lock()
+	signals = append(signals, endpoint)
+	mut.Unlock()
 	fmt.Printf("%d status code for %s\n", res.StatusCode, endpoint)
 }
